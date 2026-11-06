@@ -7,12 +7,14 @@ l'expérience et affronte un dragon.
 ## Compiler et jouer
 
 Prérequis : `gcc`/`cc`, `make`, `libncursesw5-dev` (Linux/WSL).
-Optionnels : `valgrind` (`make memcheck`), `doxygen` (`make docs`).
+Optionnels : `valgrind` (`make memcheck`), `doxygen` (`make docs`), GTK 3 (`libgtk-3-dev` et `pkg-config`) pour l'interface graphique.
 
 ```bash
 make            # bibliothèques + tests + jeu
 make test       # tests unitaires
-make run        # lance le jeu (règles par défaut)
+make run        # lance le jeu ncurses (règles par défaut)
+make gtk        # compile et lance l'interface graphique GTK 3
+make gtk RULES=critique  # interface GTK avec les règles critiques
 make run RULES=critique
 make MODE=release   # compilation optimisée, sans traces de debug
 make memcheck   # tests sous Valgrind
