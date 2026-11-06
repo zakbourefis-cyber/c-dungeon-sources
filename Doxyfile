@@ -1,0 +1,19 @@
+# Doxyfile minimal pour C-Dungeon  (make docs  ->  docs/html/index.html)
+PROJECT_NAME           = "C-Dungeon"
+PROJECT_BRIEF          = "RPG en terminal ecrit en C"
+OUTPUT_DIRECTORY       = docs
+OUTPUT_LANGUAGE        = French
+INPUT                  = include README.md
+FILE_PATTERNS          = *.h *.c *.md
+RECURSIVE              = NO
+USE_MDFILE_AS_MAINPAGE = README.md
+OPTIMIZE_OUTPUT_FOR_C  = YES
+EXTRACT_ALL            = NO
+EXTRACT_STATIC         = NO
+JAVADOC_AUTOBRIEF      = YES
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+SOURCE_BROWSER         = YES
+WARN_IF_UNDOCUMENTED   = YES
+WARN_NO_PARAMDOC       = YES
+QUIET                  = YES

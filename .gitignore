@@ -1,0 +1,12 @@
+# Fichiers générés
+build/
+docs/
+*.o
+*.a
+*.exe
+*.gch
+c-dungeon
+run_tests
+test_liste
+test_main
+cdungeon-debug.log
