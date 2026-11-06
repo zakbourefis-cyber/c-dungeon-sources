@@ -7,7 +7,7 @@
 #include "jeu.h"
 #include "liste_element.h"
 
-typedef struct GtkApplication {
+typedef struct ApplicationJeu {
     Jeu jeu;
     GtkWidget *window;
     GtkWidget *room_label;
@@ -23,18 +23,18 @@ typedef struct GtkApplication {
     GtkWidget *run_button;
     GtkWidget *use_button;
     int initialized;
-} GtkApplication;
+} ApplicationJeu;
 
-static void actualiser_interface(GtkApplication *app);
+static void actualiser_interface(ApplicationJeu *app);
 
-static void afficher_erreur(GtkApplication *app, const char *message)
+static void afficher_erreur(ApplicationJeu *app, const char *message)
 {
     gtk_label_set_text(GTK_LABEL(app->message_label), message);
 }
 
 static void action_deplacer(GtkWidget *widget, gpointer data)
 {
-    GtkApplication *app = data;
+    ApplicationJeu *app = data;
     Direction direction = (Direction)GPOINTER_TO_INT(
         g_object_get_data(G_OBJECT(widget), "direction"));
     (void)jeu_deplacer(&app->jeu, direction);
@@ -43,7 +43,7 @@ static void action_deplacer(GtkWidget *widget, gpointer data)
 
 static void action_ramasser(GtkWidget *widget, gpointer data)
 {
-    GtkApplication *app = data;
+    ApplicationJeu *app = data;
     (void)widget;
     (void)jeu_ramasser(&app->jeu);
     actualiser_interface(app);
@@ -51,7 +51,7 @@ static void action_ramasser(GtkWidget *widget, gpointer data)
 
 static void action_attaquer(GtkWidget *widget, gpointer data)
 {
-    GtkApplication *app = data;
+    ApplicationJeu *app = data;
     (void)widget;
     (void)jeu_attaquer(&app->jeu);
     actualiser_interface(app);
@@ -59,7 +59,7 @@ static void action_attaquer(GtkWidget *widget, gpointer data)
 
 static void action_sort(GtkWidget *widget, gpointer data)
 {
-    GtkApplication *app = data;
+    ApplicationJeu *app = data;
     (void)widget;
     (void)jeu_lancer_sort(&app->jeu);
     actualiser_interface(app);
@@ -67,7 +67,7 @@ static void action_sort(GtkWidget *widget, gpointer data)
 
 static void action_fuir(GtkWidget *widget, gpointer data)
 {
-    GtkApplication *app = data;
+    ApplicationJeu *app = data;
     (void)widget;
     (void)jeu_fuir(&app->jeu);
     actualiser_interface(app);
@@ -75,7 +75,7 @@ static void action_fuir(GtkWidget *widget, gpointer data)
 
 static void action_utiliser(GtkWidget *widget, gpointer data)
 {
-    GtkApplication *app = data;
+    ApplicationJeu *app = data;
     int indice = gtk_combo_box_get_active(GTK_COMBO_BOX(app->inventory_combo));
     (void)widget;
 
@@ -89,7 +89,7 @@ static void action_utiliser(GtkWidget *widget, gpointer data)
 
 static void action_recommencer(GtkWidget *widget, gpointer data)
 {
-    GtkApplication *app = data;
+    ApplicationJeu *app = data;
     Resultat resultat;
     (void)widget;
 
@@ -106,7 +106,7 @@ static void action_recommencer(GtkWidget *widget, gpointer data)
     }
 }
 
-static void actualiser_interface(GtkApplication *app)
+static void actualiser_interface(ApplicationJeu *app)
 {
     Salle *salle = jeu_salle_courante(&app->jeu);
     Ennemi *ennemi = jeu_ennemi_courant(&app->jeu);
@@ -184,7 +184,7 @@ static GtkWidget *ajouter_bouton(GtkWidget *box, const char *label,
 
 static void detruire_fenetre(GtkWidget *widget, gpointer data)
 {
-    GtkApplication *app = data;
+    ApplicationJeu *app = data;
     (void)widget;
 
     if (app->initialized) {
@@ -196,7 +196,7 @@ static void detruire_fenetre(GtkWidget *widget, gpointer data)
 
 int main(int argc, char **argv)
 {
-    GtkApplication app = {0};
+    ApplicationJeu app = {0};
     const Regles *regles = NULL;
     GtkWidget *root;
     GtkWidget *section;
